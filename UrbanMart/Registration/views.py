@@ -74,7 +74,7 @@ def login_user(request):
     return redirect('homepage')
 
 def oauth_login_success(request):
-    messages.success(request, 'Successfully logged in  with Google!')
+    messages.success(request, 'Successfully logged in with Google!')
     return redirect('homepage')
 
 def oauth_login_error(request):
@@ -83,5 +83,5 @@ def oauth_login_error(request):
 
 def logout_user(request):
     request.session.flush()  
-    messages.success(request, "Logout successful.")
+    messages.success(request, "You have been logged out.")
     return redirect('homepage')  
