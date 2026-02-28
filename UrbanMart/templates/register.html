@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UrbanMart - Register</title>
+  
+  <!-- Fonts and styles from main website -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #6C63FF;
+      --secondary: #F8F8FF;
+      --accent: #FFB86B;
+      --text: #22223B;
+    }
+
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      background: var(--secondary);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      position: relative;
+    }
+
+    .register-container {
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(108,99,255,0.15);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .register-container h2 {
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .register-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .register-container input {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .register-container button[type="submit"],
+    .register-container a.login-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .register-container button[type="submit"]:hover,
+    .register-container a.login-btn:hover {
+      background: var(--accent);
+      color: var(--text);
+    }
+
+    .register-container a.login-btn {
+      display: block;
+      margin-top: 1rem;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 1rem;
+      width: 100%;
+      text-align: center;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    @media (max-height: 600px) {
+      footer {
+        position: static;
+        margin-top: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="register-container">
+    <h2>Create Your Account</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Register</button>
+    </form>
+    <a href="{% url 'homepage' %}" class="login-btn">← Back to Home</a>
+  </div>
+
+  <footer>&copy; 2025 UrbanMart. All rights reserved.</footer>
+
+</body>
+</html>

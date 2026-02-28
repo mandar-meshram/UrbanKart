@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Category - UrbanMart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6C63FF;
+      --secondary: #F8F8FF;
+      --accent: #FFB86B;
+      --text: #22223B;
+      --nav-bg: #fff;
+      --nav-shadow: 0 2px 16px rgba(108,99,255,0.08);
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      background: var(--secondary);
+      color: var(--text);
+    }
+
+    .navbar {
+      background: var(--nav-bg);
+      box-shadow: var(--nav-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-links li a:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 3rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    form input, form select, form textarea {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button[type="submit"] {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s ease-in-out;
+    }
+
+    button[type="submit"]:hover {
+      background: var(--accent);
+      color: var(--text);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      background: #23223b;
+      color: #fff;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-logo">UrbanCart</div>
+    <ul class="nav-links">
+      <li><a href="{% url 'homepage' %}">Home</a></li>
+      <li><a href="{% url 'view_cart' %}">Cart</a></li>
+      <li><a href="{% url 'logout_user' %}" class="login-btn">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Form Section -->
+  <div class="container">
+    <h2>Add New Category</h2>
+    <form method="post" action="{% url 'add_category' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Add Category</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 UrbanMart. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

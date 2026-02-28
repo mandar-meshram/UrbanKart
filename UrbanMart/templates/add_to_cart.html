@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products - UrbanMart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #6C63FF;
+      --secondary: #F8F8FF;
+      --accent: #FFB86B;
+      --text: #22223B;
+      --nav-bg: #fff;
+      --nav-shadow: 0 2px 16px rgba(108,99,255,0.08);
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      background: var(--secondary);
+      color: var(--text);
+    }
+
+    .navbar {
+      background: var(--nav-bg);
+      box-shadow: var(--nav-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .nav-links li a:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      padding: 3rem 2rem;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+      max-width: 260px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    .product-card img {
+      max-width: 100%;
+      border-radius: 8px;
+      height: 180px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    .product-card h3 {
+      color: var(--primary);
+      margin: 0.5rem 0;
+    }
+
+    .product-card p {
+      margin: 0.4rem 0;
+    }
+
+    .product-card form button {
+      background: var(--primary);
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.8rem;
+    }
+
+    .product-card form button:hover {
+      background: var(--accent);
+      color: var(--text);
+    }
+
+    .login-link {
+      display: inline-block;
+      margin-top: 0.8rem;
+      color: var(--primary);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .login-link:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      background: #23223b;
+      color: #fff;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-logo">UrbanCart</div>
+    <ul class="nav-links">
+      <li><a href="{% url 'homepage' %}">Home</a></li>
+      <li><a href="{% url 'view_cart' %}">Cart</a></li>
+      <li><a href="{% url 'logout_user' %}" class="login-btn">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Product Grid -->
+  <div class="product-grid">
+    {% for product in products %}
+      <div class="product-card">
+        {% if product.image %}
+          <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% endif %}
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <p>₹{{ product.price }}</p>
+
+        {% if request.session.user_id %}
+          <form method="POST" action="{% url 'add_to_cart' %}">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <button type="submit">Add to Cart</button>
+          </form>
+        {% else %}
+          <a href="#loginModal" class="login-link" onclick="document.getElementById('loginModal').style.display='block'">
+            Login to add to cart
+          </a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 UrbanMart. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

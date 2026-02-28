@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UrbanMart - Your Cart</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #6C63FF;
+      --secondary: #F8F8FF;
+      --accent: #FFB86B;
+      --text: #22223B;
+      --nav-bg: #fff;
+      --nav-shadow: 0 2px 16px rgba(108,99,255,0.08);
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      background: var(--secondary);
+      color: var(--text);
+    }
+
+    .navbar {
+      background: var(--nav-bg);
+      box-shadow: var(--nav-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+
+    .nav-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .nav-links li a:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .cart-container {
+      max-width: 900px;
+      margin: 3rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 14px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f0f0ff;
+      color: var(--text);
+    }
+
+    .empty {
+      text-align: center;
+      font-size: 1.2rem;
+      padding: 2rem 0;
+    }
+
+    .grand-total {
+      text-align: right;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 1.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      background: #23223b;
+      color: #fff;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-logo">UrbanCart</div>
+    <ul class="nav-links">
+      <li><a href="{% url 'homepage' %}">Home</a></li>
+      <li><a href="{% url 'logout_user' %}">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Cart Content -->
+  <div class="cart-container">
+    <h1>Your Shopping Cart</h1>
+
+    {% if cart_items %}
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Qty</th>
+          <th>Price (each)</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart_items %}
+        <tr>
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>₹{{ item.product.price }}</td>
+          <td>₹{{ item.total_price }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <p class="grand-total">Grand Total: ₹{{ grand_total }}</p>
+
+    {% else %}
+      <p class="empty">Your cart is currently empty.</p>
+    {% endif %}
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 UrbanMart. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
