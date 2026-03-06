@@ -1,1 +1,3 @@
 UrbanMart/.env
+__pycache__/
+*.pyc
