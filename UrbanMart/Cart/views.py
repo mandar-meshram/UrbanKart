@@ -3,7 +3,7 @@ from Products.models import Products
 from django.contrib.auth.decorators import login_required
 from .models import Cart, CartItem
 from Registration.models import Registration
-from django import messages
+from django.contrib import messages
 
 
 def add_to_cart(request):
