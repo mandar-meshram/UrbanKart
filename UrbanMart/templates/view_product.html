@@ -146,22 +146,26 @@
   <!-- Product Listing -->
   <div class="product-grid">
     {% for product in products %}
-      <div class="product-card">
-        {% if product.image %}
-          <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" />
+    <div class="product-card">
+        {% if product.image_url %}
+        <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image" 
+             onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+        {% else %}
+        <img src="https://via.placeholder.com/300x200?text=No+Image" alt="No image" class="product-image">
         {% endif %}
         <h3>{{ product.name }}</h3>
-        <p class="product-description">{{ product.description }}</p>
+        <p class="product-description">{{ product.description|truncatechars:100 }}</p>
         <p class="product-price">₹{{ product.price }}</p>
-
         <form method="POST" action="{% url 'add_to_cart' %}">
-          {% csrf_token %}
-          <input type="hidden" name="product_id" value="{{ product.id }}">
-          <button type="submit">Add to Cart</button>
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <button type="submit">Add to Cart</button>
         </form>
-      </div>
+    </div>
+    {% empty %}
+    <p>No products found in this category.</p>
     {% endfor %}
-  </div>
+</div>
 
   <!-- Footer -->
   <footer>
