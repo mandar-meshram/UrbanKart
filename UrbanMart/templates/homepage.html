@@ -511,31 +511,69 @@ footer {
   </section>
 
   <!-- Categories Section -->
-  <section id="categories" class="categories-section">
+  <!-- Categories Section -->
+<section id="categories" class="categories-section">
     <h2>Categories</h2>
     <div class="categories-grid">
-      <div class="category-card">
-        <a href="{% url 'view_product' 2 %}" class="category-card">
-          <img src="https://img.icons8.com/color/96/000000/t-shirt.png" alt="Fashion" />
-          <h3>Fashion</h3>
+        <!-- Fashion Category -->
+        {% if categories.fashion %}
+        <a href="{% url 'view_product' categories.fashion.id %}" class="category-card">
+            <img src="https://img.icons8.com/color/96/000000/t-shirt.png" alt="Fashion" />
+            <h3>Fashion</h3>
+            <small>{{ categories.fashion.product_set.count }} products</small>
         </a>
-      </div>
-      <div class="category-card">
-        <a href="{% url 'view_product' 1 %}" class="category-card">
-          <img src="https://img.icons8.com/color/96/000000/laptop.png" alt="Electronics"/>
-          <h3>Electronics</h3>
+        {% else %}
+        <div class="category-card" style="opacity:0.6; cursor:not-allowed;">
+            <img src="https://img.icons8.com/color/96/000000/t-shirt.png" alt="Fashion" />
+            <h3>Fashion</h3>
+            <small>Coming soon</small>
+        </div>
+        {% endif %}
+
+        <!-- Electronics Category -->
+        {% if categories.electronics %}
+        <a href="{% url 'view_product' categories.electronics.id %}" class="category-card">
+            <img src="https://img.icons8.com/color/96/000000/laptop.png" alt="Electronics"/>
+            <h3>Electronics</h3>
+            <small>{{ categories.electronics.product_set.count }} products</small>
         </a>
-      </div>
-      <div class="category-card">
-        <img src="https://img.icons8.com/color/96/000000/grocery-bag.png" alt="Groceries"/>
-        <h3>Groceries</h3>
-      </div>
-      <div class="category-card">
-        <img src="https://img.icons8.com/color/96/000000/sofa.png" alt="Home & Living"/>
-        <h3>Home & Living</h3>
-      </div>
+        {% else %}
+        <div class="category-card" style="opacity:0.6; cursor:not-allowed;">
+            <img src="https://img.icons8.com/color/96/000000/laptop.png" alt="Electronics"/>
+            <h3>Electronics</h3>
+            <small>Coming soon</small>
+        </div>
+        {% endif %}
+
+        <!-- Groceries Category -->
+        {% if categories.groceries %}
+        <a href="{% url 'view_product' categories.groceries.id %}" class="category-card">
+            <img src="https://img.icons8.com/color/96/000000/grocery-bag.png" alt="Groceries"/>
+            <h3>Groceries</h3>
+            <small>{{ categories.groceries.product_set.count }} products</small>
+        </a>
+        {% else %}
+        <div class="category-card">
+            <img src="https://img.icons8.com/color/96/000000/grocery-bag.png" alt="Groceries"/>
+            <h3>Groceries</h3>
+        </div>
+        {% endif %}
+
+        <!-- Home & Living Category -->
+        {% if categories.home %}
+        <a href="{% url 'view_product' categories.home.id %}" class="category-card">
+            <img src="https://img.icons8.com/color/96/000000/sofa.png" alt="Home & Living"/>
+            <h3>Home & Living</h3>
+            <small>{{ categories.home.product_set.count }} products</small>
+        </a>
+        {% else %}
+        <div class="category-card">
+            <img src="https://img.icons8.com/color/96/000000/sofa.png" alt="Home & Living"/>
+            <h3>Home & Living</h3>
+        </div>
+        {% endif %}
     </div>
-  </section>
+</section>
 
   <!-- Footer -->
   <footer>

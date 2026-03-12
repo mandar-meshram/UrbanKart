@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Products    
 from .forms import ProductForm
 from Registration.decorators import admin_required
 from django.contrib import messages
+from Categories.models import Category
 
 
 # Create your views here.
@@ -22,5 +23,6 @@ def add_product(request):
 
 
 def view_products(request, pk):
-    products = Products.objects.all().filter(category_id=pk)
-    return render(request, 'view_product.html', {'products': products})
+    category = get_object_or_404(Category, id=pk)
+    products = Products.objects.all().filter(category=category)
+    return render(request, 'view_product.html', {'products': products, 'category': category})

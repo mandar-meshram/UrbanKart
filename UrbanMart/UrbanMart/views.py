@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from Registration.models import Registration
+from Categories.models import Category
 
 
 
@@ -16,8 +17,17 @@ def homepage(request):
         except Registration.DoesNotExist:
             is_admin = False
 
+    # Get the 4 main categories by name (case-insensitive)
+    categories = {
+        'fashion': Category.objects.filter(name__icontains='Fashion').first(),
+        'electronics': Category.objects.filter(name__icontains='Electronics').first(),
+        'groceries': Category.objects.filter(name__icontains='Groceries').first(),
+        'home': Category.objects.filter(name__icontains='Home').first(),
+    }
+
     return render(request, 'homepage.html', {
         'user_name': user_name,
         'is_admin': is_admin,
-        'user_id': user_id
+        'user_id': user_id,
+        'categories': categories
     })  
