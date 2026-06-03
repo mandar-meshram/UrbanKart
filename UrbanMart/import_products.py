@@ -55,7 +55,7 @@ def get_category_from_tree(category_tree):               # determine which of th
                 if keyword in full_path:
                     return category_name
                 
-        return None       # if no match found, return None (skips product)
+        return None       # if no match found, return None (skips product)  
     
     except Exception as e:
         print(f'Error parsing category tree: {e}')
@@ -166,15 +166,25 @@ def import_filtered_products(file_path):
                 # get description
                 description = get_description(row)
 
-                # get image url
+                # Get image URL
                 image_url = ''
-                if row.get('image_url'):
+
+                if row.get('image'):
+
                     try:
-                        image_list = ast.literal_eval(row['image', '[]'])
-                        if image_list and len(image_list) > 0:
-                            image_url = image_list[0]     # this takes the first image
-                    except :
-                        pass
+                        # Convert string list into actual Python list
+                        image_list = ast.literal_eval(row.get('image', '[]'))
+
+                        # Take first image only
+                        if isinstance(image_list, list) and len(image_list) > 0:
+                            image_url = image_list[0].strip()
+                            # Convert HTTP to HTTPS
+                            if image_url.startswith('http://'):
+                                image_url = image_url.replace('http://', 'https://') 
+
+                    except Exception as e:
+                        print(f"Image parsing error on row {row_num}: {e}")
+
 
                 # create or update product
                 product, created = Products.objects.update_or_create(
