@@ -150,6 +150,93 @@ body {
   animation: fadeInUp 1s;
 }
 
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero .eyebrow {
+  display: inline-block;
+  background: rgba(108, 99, 255, 0.12);
+  color: var(--primary);
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero .cta-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.cta-btn.secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  box-shadow: none;
+}
+
+.cta-btn.secondary:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.hero-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.hero-highlight {
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(108,99,255,0.14);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  font-weight: 600;
+  color: var(--text);
+  box-shadow: 0 4px 12px rgba(108,99,255,0.06);
+}
+
+.section-title {
+  color: var(--primary);
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.highlight-card {
+  background: linear-gradient(120deg, #f8f8ff 85%, #e0e7ff 100%);
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(108,99,255,0.06);
+}
+
+.highlight-card h3 {
+  margin: 0 0 0.4rem;
+  color: var(--primary);
+}
+
+.highlight-card p {
+  margin: 0;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
 .admin-panel h5 {
   color: white;
   margin-bottom: 1rem;
@@ -343,6 +430,10 @@ footer {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
   }
+  .hero-highlights,
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
   .navbar {
     padding: 0 1rem;
   }
@@ -484,9 +575,20 @@ footer {
 
   <!-- Hero Section -->
   <header class="hero">
-    <h1>Welcome to UrbanMart</h1>
-    <p>Your modern, reliable, and diverse online marketplace.</p>
-    <a href="#categories" class="cta-btn">Shop Now</a>
+    <div class="hero-content">
+      <div class="eyebrow">Fresh picks • Fast delivery • Trusted service</div>
+      <h1>Discover everyday essentials in a smarter shopping experience.</h1>
+      <p>From fashion favorites to home upgrades, UrbanMart brings together curated products and a modern checkout experience in one place.</p>
+      <div class="cta-group">
+        <a href="#categories" class="cta-btn">Shop Now</a>
+        <a href="#about" class="cta-btn secondary">Why UrbanMart</a>
+      </div>
+      <div class="hero-highlights">
+        <div class="hero-highlight">⚡ Quick browsing</div>
+        <div class="hero-highlight">🛍️ Curated categories</div>
+        <div class="hero-highlight">🔒 Secure shopping</div>
+      </div>
+    </div>
   </header>
 
   <!-- ADMIN PANEL - This goes RIGHT AFTER the hero section -->
@@ -503,17 +605,30 @@ footer {
 
   <!-- About Us Section -->
   <section id="about" class="about-section">
-    <h2>About Us</h2>
+    <h2 class="section-title">Why UrbanMart?</h2>
     <p>
-      UrbanMart is your one-stop destination for quality products, unbeatable prices, and exceptional customer service. 
-      We bring the city's best shopping experience online, making it easy for you to find everything you need, anytime, anywhere.
+      UrbanMart is your one-stop destination for quality products, unbeatable prices, and exceptional customer service. We bring the city's best shopping experience online, making it easy for you to find everything you need, anytime, anywhere.
     </p>
+    <div class="highlights-grid">
+      <div class="highlight-card">
+        <h3>Curated Choices</h3>
+        <p>Browse hand-picked essentials across our most popular categories.</p>
+      </div>
+      <div class="highlight-card">
+        <h3>Easy Shopping</h3>
+        <p>Discover products quickly, add them to your cart, and check out without friction.</p>
+      </div>
+      <div class="highlight-card">
+        <h3>Customer First</h3>
+        <p>We focus on a smooth experience, dependable support, and products you can trust.</p>
+      </div>
+    </div>
   </section>
 
   <!-- Categories Section -->
   <!-- Categories Section -->
 <section id="categories" class="categories-section">
-    <h2>Categories</h2>
+    <h2 class="section-title">Explore Popular Categories</h2>
     <div class="categories-grid">
         <!-- Fashion Category -->
         {% if categories.fashion %}
